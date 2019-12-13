@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <h1>{{article.title}}</h1>
+        <h2>作者：{{article.author}}</h2>
+        <h3>{{article.publishDate}}</h3>
+        <p>
+            <img :src="article.imgSrc">
+            {{article.content}}
+        </p> -->
+        <!-- heart是组件的一个属性，那么组件必须通过props声明这个属性 -->
+        <!-- <lzy v-bind:heart="article"></lzy>
+        <lzy v-bind:heart="article2"></lzy> -->
+        <lzy v-for="article in articleList" :key="article.title" :heart="article">
+           
+        </lzy>
+    </div>
+    <script>
+        //定义lzy这个自定义组件
+        //第一个参数是自定义组件的标签名称，第二参数是定义该组件的运行规则对象
+        Vue.component('lzy',{
+            props:['heart'],
+
+            //template中定义的是组件的模板，也就是html和{{}}以及vue指令的组合
+            //template必须要有根标签 例如<h1></h1><h2></h2>不合法， <div><h1></h1><h2></h2></div>合法
+            template:'<div>'+
+                '<h1 style="color:red">{{heart.title}}</h1>'+
+                '<h2>作者：{{heart.author}}</h2>'+
+                '<h3>{{heart.publishDate}}</h3>'+
+                '<p>{{heart.content}}</p>'+
+            '</div>'
+        });
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                articleList:[
+                {
+                    title:"哥谭列传",
+                    author:"BadMan",
+                    publishDate:"2019-12-13",
+                    content:"111222333444555666",
+                },
+                {
+                    title:"Joker",
+                    author:"BadMan",
+                    publishDate:"2019-12-13",
+                    content:"Why So Serious?",
+                },
+                    {
+                    title:"day1",
+                    author:"BadMan",
+                    publishDate:"2019-12-13",
+                    content:"Happy",
+                 },
+                    {
+                    title:"day2",
+                    author:"BadMan",
+                    publishDate:"2019-12-13",
+                    content:"Put happy on your face",
+                 }
+                ]
+            },    
+        })
+    </script>
+    <style>
+        
+    </style>
+</body>
+</html>
